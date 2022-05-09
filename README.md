@@ -35,3 +35,17 @@ graph TD;
   ```
   
 
+## 数据库设计
+```mermaid
+classDiagram
+Stock --|> Financial
+Stock : str Code（代码）
+Stock : str StockName（名称）
+Stock : str Industry（所属行业）
+Stock : text Theme（题材名称）
+Stock --|> Theme
+Theme : str ThemeName（题材名称）
+Stock --|> Industry
+Industry : str IndustryName（行业名称）
+```
+
