@@ -79,6 +79,7 @@ Industry : datetime CreatTime（创建时间）
           B -->|获取财务指标 | D(每股现金流)
           C -->|行业成份股ROE合计比行业成份股数量 | E(行业平均ROE)
           E -->|股票ROE大于行业平均ROE | F(好股票清单)
+          C -->jslkkkwnlljfspjfop
           subgraph ROE
             C
             E
