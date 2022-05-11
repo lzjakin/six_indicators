@@ -42,10 +42,10 @@
 
 
 ### 数据来源
-1、行业信息：
-2、题材信息
-1、行业信息：
-  
+1、行业信息：获取行业名单《东方财富-行业板块》（接口: stock_board_industry_name_em）
+           货物行业成份股《东方财富-成份股》（接口: stock_board_industry_cons_em）
+2、股票财务指标：获取个股财务信息《财务报表-新浪》（接口: stock_financial_report_sina）
+
 
 ### 数据库设计
 ```mermaid
