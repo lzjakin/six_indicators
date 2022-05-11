@@ -1,6 +1,8 @@
 ## 项目：六大指标选股
 说明：按照行业进行筛选，找到每个行业的六大指标平均数，然后将每个行业高于指标和低于指标的股票都筛选出来
 
+
+  
 ## 策略说明
 #### 财务指标
 * ROE ROE(股東權益報酬率) = 稅後淨利 / 股東權益
@@ -31,6 +33,8 @@
 4、然后把六个指标中都属于好公司的企业挑出来；  
 5、将这些挑出来的好公司进行排序显示；  
 
+
+  
 ## 功能实现
 ### 功能目标
 将值得推荐的好公司输出excel表，方便查看
@@ -44,7 +48,7 @@
 * 1、行业信息：  
 获取行业名单《东方财富-行业板块》（接口: stock_board_industry_name_em）  
 货物行业成份股《东方财富-成份股》（接口: stock_board_industry_cons_em）   
-* 2、股票财务指标：获取个股财务信息《财务报表-新浪》（接口: stock_financial_report_sina）  
+* 2、股票财务指标：获取个股财务信息《财务指标》（接口: stock_financial_analysis_indicator）  
 
 
 ### 数据库设计
@@ -66,26 +70,23 @@ Industry : str IndustryName（行业名称）
 Industry : datetime CreatTime（创建时间）
 ```
 
-
-
 ### 流程
 ```mermaid
 %%{init: {'theme':'base'}}%%
         graph TD
-          A[Christmas] -->|Get money| B(Go shopping)
-          B --> C{Let me think}
-          B --> G[/Another/]
-          C ==>|One| D[Laptop]
-          C -->|Two| E[iPhone]
-          C -->|Three| F[fa:fa-car Car]
-          subgraph section
+          A[行业清单] -->|获取成份股 | B(股票清单)
+          B -->|获取财务指标 | C(ROE)
+          B -->|获取财务指标 | D(每股现金流)
+          C -->|行业成份股ROE合计比行业成份股数量 | E(行业平均ROE)
+          E -->|股票ROE大于行业平均ROE | F(好股票清单)
+          subgraph ROE
             C
-            D
             E
             F
-            G
           end
-
-
+          
   ```
+
+
+
   
