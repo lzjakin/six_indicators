@@ -51,14 +51,19 @@
 ```mermaid
 classDiagram
 Stock --|> Financial
+Stock --|> Industry
 Stock : str Code（代码）
 Stock : str StockName（名称）
 Stock : str Industry（所属行业）
 Stock : text Theme（题材名称）
-Stock --|> Theme
-Theme : str ThemeName（题材名称）
-Stock --|> Industry
+Financial : str StockName（股票名称）
+Financial : str Code（股票代码）
+Financial : str ROE（ROE）
+Financial : datetime UpdateTime（财务指标更新时间）
+Industry : str StockName（股票名称）
+Industry : str Code（股票代码）
 Industry : str IndustryName（行业名称）
+Industry : datetime CreatTime（创建时间）
 ```
 
 
