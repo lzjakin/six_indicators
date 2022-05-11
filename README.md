@@ -1,6 +1,5 @@
-## 目标
-#### 六大指标选股
-按照行业进行筛选，找到每个行业的六大指标平均数，然后将每个行业高于指标和低于指标的股票都筛选出来
+## 项目：六大指标选股
+说明：按照行业进行筛选，找到每个行业的六大指标平均数，然后将每个行业高于指标和低于指标的股票都筛选出来
 
 ## 策略说明
 #### 财务指标
@@ -32,11 +31,38 @@
 4、然后把六个指标中都属于好公司的企业挑出来；  
 5、将这些挑出来的好公司进行排序显示；  
 
-## 页面效果
+## 功能实现
+### 功能目标
+将值得推荐的好公司输出excel表，方便查看
+
+|  股票名称   | 股票代码  | 所在行业  |  ROE  | 每股现金流  | 利润率  |  税后净利润  | 股东持股比例  | 股东质押比率  |
+|  ----  | ----  | ----  | ----  | ----  | ----  | ----  | ----  | ----  |
+| 单元格  | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 |
+| 单元格  | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 | 单元格 |
+
+
+### 数据来源
+1、行业信息：
+2、题材信息
+1、行业信息：
+  
+
+### 数据库设计
+```mermaid
+classDiagram
+Stock --|> Financial
+Stock : str Code（代码）
+Stock : str StockName（名称）
+Stock : str Industry（所属行业）
+Stock : text Theme（题材名称）
+Stock --|> Theme
+Theme : str ThemeName（题材名称）
+Stock --|> Industry
+Industry : str IndustryName（行业名称）
+```
 
 
 
-## 开发说明
 ### 流程
 ```mermaid
 %%{init: {'theme':'base'}}%%
@@ -58,18 +84,3 @@
 
   ```
   
-
-### 数据库设计
-```mermaid
-classDiagram
-Stock --|> Financial
-Stock : str Code（代码）
-Stock : str StockName（名称）
-Stock : str Industry（所属行业）
-Stock : text Theme（题材名称）
-Stock --|> Theme
-Theme : str ThemeName（题材名称）
-Stock --|> Industry
-Industry : str IndustryName（行业名称）
-```
-
