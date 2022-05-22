@@ -29,21 +29,65 @@ ROE(股東權益報酬率) = 稅後淨利 / 股東權益
 
 """
 
+
 import akshare as ak
+import pandas as pd
 
-#获取ROI
+"""
+获取行业名单《东方财富-行业板块》（接口: stock_board_industry_name_em）
+货物行业成份股《东方财富-成份股》（接口: stock_board_industry_cons_em）
+"""
 
-#获取自由现金流
+#data = pd.DataFrame(columns=['板块名称','代码','名称','ROE','自由现金流','营业收益率','税后净利润','股东持股比例','股东质押比率'])
+data = pd.DataFrame(columns=['板块名称','代码','名称','ROE','自由现金流','营业收益率','税后净利润'])
 
-stock_financial_analysis_indicator_df = ak.stock_financial_analysis_indicator(symbol="600004")
+stock_board_industry_name_em_df = ak.stock_board_industry_name_em()
 
-for index,row in stock_financial_analysis_indicator_df.iterrows():
-    print(row['日期'],row['净资产收益率(%)'],row['每股经营性现金流(元)'])
+for index,row in stock_board_industry_name_em_df.iterrows():
+    print(row["板块名称"])
+    print("---1--")
+    #
+    stock_board_industry_cons_em_df = ak.stock_board_industry_cons_em(symbol=row["板块名称"])
+    #stock_board_industry_cons_em_df = ak.stock_board_industry_cons_em(symbol="有色金属")#test
+    #print(stock_board_industry_cons_em_df)#test
+
+    for subindex,subrow in stock_board_industry_cons_em_df.iterrows():
+        #
+        print(subrow["名称"])
+        print("---2--")
+        #
+        stock_financial_analysis_indicator_df = ak.stock_financial_analysis_indicator(symbol=subrow["代码"])
+        #stock_financial_analysis_indicator_df = ak.stock_financial_analysis_indicator(symbol="000612")#test
+        #print(stock_financial_analysis_indicator_df)#test
+        
+        #
+        print(stock_financial_analysis_indicator_df)
+        print("--3---")
+        
+        ROE = stock_financial_analysis_indicator_df.iloc[0,:]["净资产收益率(%)"]
+        FCF = stock_financial_analysis_indicator_df.iloc[0,:]["每股经营性现金流(元)"]
+        OPE = stock_financial_analysis_indicator_df.iloc[0,:]["主营业务利润率(%)"]
+        SM = stock_financial_analysis_indicator_df.iloc[0,:]["销售净利率(%)"]
+        print("--4---")
+        
+        #print(stock_financial_analysis_indicator_df)
+        #
+
+        #for index,row in stock_financial_analysis_indicator_df.iterrows():
+        #    print(row['日期'],row['净资产收益率(%)'],row['每股经营性现金流(元)'])
+    #
+
+        #data = data.append({'板块名称':row["板块名称"],'代码':subrow["代码"],'名称':subrow["名称"]}, ignore_index=True)
+        #data = data.append({'板块名称':row["板块名称"],'代码':subrow["代码"],'名称':subrow["名称"],'ROE':ROE,'自由现金流':FCF,'营业收益率':OPE,'税后净利润':SM,'股东持股比例','股东质押比率'}, ignore_index=True)
+        data = data.append({'板块名称':row["板块名称"],'代码':subrow["代码"],'名称':subrow["名称"],'ROE':ROE,'自由现金流':FCF,'营业收益率':OPE,'税后净利润':SM}, ignore_index=True)
+        print("--5---")
+#
+
+print(data)
+
+#输出excel
+data.to_excel("./six_indicators.xls", index=False)
 
 
-
-
-
-print(stock_financial_analysis_indicator_df)
 
 
